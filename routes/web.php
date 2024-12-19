@@ -38,6 +38,7 @@ Route::get('/riwayat', function () {
 
 
 // pakai BuildingController
+use App\Http\Controllers\BuildingController;
 Route::get('/mahasiswa/index_mhs', [BuildingController::class, 'indexMahasiswa'])->name('mahasiswa.index_mhs');
 Route::get('/admin/form_gedung', [BuildingController::class, 'create'])->name('admin.form_gedung');
 Route::post('/building/store', [BuildingController::class, 'store'])->name('admin.store_gedung');
