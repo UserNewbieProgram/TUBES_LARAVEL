@@ -1,12 +1,14 @@
 @extends('layouts.main_admin')
 
 @section('title', 'Input Gedung')
-
+@push('styles')
+    <link href="{{ asset('assets/css/style_Admin.css') }}" rel="stylesheet">
+@endpush
 @section('content')
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('admin.dashboard') }}" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/img/logo.png') }}" alt="">
             <span class="d-none d-lg-block">N-Space</span>
         </a>
@@ -31,7 +33,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.profile') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="#}">
                             <i class="bi bi-person"></i>
                             <span>Profil Saya</span>
                         </a>
@@ -41,7 +43,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Keluar</span>
                         </a>
@@ -56,7 +58,7 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.dashboard') }}">
+            <a class="nav-link collapsed" href="#">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -68,12 +70,12 @@
             </a>
             <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('admin.create_building') }}" class="active">
+                    <a href="{{ route('admin.form_gedung') }}" class="active">
                         <i class="bi bi-circle"></i><span>Data Gedung</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.create_room') }}">
+                    <a href="#">
                         <i class="bi bi-circle"></i><span>Data Ruang</span>
                     </a>
                 </li>
@@ -86,12 +88,12 @@
             </a>
             <ul id="edits-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('admin.edit_building') }}">
+                    <a href="#">
                         <i class="bi bi-circle"></i><span>Data Gedung</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.display_room') }}">
+                    <a href="#">
                         <i class="bi bi-circle"></i><span>Data Ruang</span>
                     </a>
                 </li>
@@ -99,7 +101,7 @@
         </li><!-- End Edit Data Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('admin.riwayat') }}">
+            <a class="nav-link collapsed" href="#">
                 <i class="bi bi-layout-text-window-reverse"></i>
                 <span>Riwayat</span>
             </a>
@@ -110,6 +112,66 @@
 
 <main id="main" class="main">
     <!-- Konten utama form dan lainnya di sini, sesuai dengan yang sudah dijelaskan sebelumnya -->
+    <div class="pagetitle">
+      <h1>Tambah Data</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+          <li class="breadcrumb-item">Tambah Data</li>
+          <li class="breadcrumb-item active">Data Gedung</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Formulir Tambah Data Gedung</h5>
+
+              <!-- Formulir Input Data Gedung -->
+              <form action="{{ route('admin.store_gedung') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="row mb-3">
+        <label for="inputText" class="col-sm-2 col-form-label">Nama Gedung</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="name_building" id="inputText">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputNumber" class="col-sm-2 col-form-label">Jumlah Lantai</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" name="floor" id="inputNumber">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputURL" class="col-sm-2 col-form-label">Alamat (Link Maps)</label>
+        <div class="col-sm-10">
+            <input type="url" class="form-control" name="mapping" id="inputURL" placeholder="https://contoh.com">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="formFile" class="col-sm-2 col-form-label">Foto Upload</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="file" name="foto" id="formFile">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Submit Form</button>
+            <button type="reset" class="btn btn-secondary ms-2">Reset Form</button>
+        </div>
+    </div>
+</form>
+
+            
+            </div>
+          </div>
+        </div>
+      </div>
 </main><!-- End #main -->
 
 <footer id="footer" class="footer">
