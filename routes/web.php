@@ -38,10 +38,9 @@ Route::get('/riwayat', function () {
 
 
 // pakai BuildingController
-Route::get('/building/create', function () {
-    return view('form_gedung');
-})->name('admin.create_building');
-
-Route::get('/building/edit', function () {
-    return view('edit_gedung');
-})->name('admin.edit_building');
+Route::get('/mahasiswa/index_mhs', [BuildingController::class, 'indexMahasiswa'])->name('mahasiswa.index_mhs');
+Route::get('/admin/form_gedung', [BuildingController::class, 'create'])->name('admin.form_gedung');
+Route::post('/building/store', [BuildingController::class, 'store'])->name('admin.store_gedung');
+Route::get('/admin/{id}/edit_gedung', [BuildingController::class, 'edit'])->name('admin.edit_gedung');
+Route::put('/admin/{id}/edit_gedung', [BuildingController::class, 'update'])->name('admin.update_gedung');
+// Route::delete('/admin/{id}', [BuildingController::class, 'destroy']);
