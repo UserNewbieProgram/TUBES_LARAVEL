@@ -1,11 +1,13 @@
-@extends('layouts.main_admin')
+@extends('layouts.main_mhs')
 
 @section('title', 'Dashboard Mahasiswa')
-
+@push('styles')
+    <link href="{{ asset('assets/css/style_Mahasiswa.css') }}" rel="stylesheet">
+@endpush
 @section('content')
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('mahasiswa.dashboard') }}" class="logo d-flex align-items-center">
+        <a href="{{ route('mahasiswa.index_mhs') }}" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/img/logo.png') }}" alt="">
             <span class="d-none d-lg-block">N-Space</span>
         </a>
@@ -27,7 +29,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('mahasiswa.profil') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-person"></i>
                             <span>Profil Saya</span>
                         </a>
@@ -36,7 +38,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Keluar</span>
                         </a>
@@ -53,7 +55,7 @@
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('mahasiswa.dashboard') }}">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('mahasiswa.index_mhs') }}">Beranda</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>
@@ -104,11 +106,14 @@
         <div class="card-group">
             @foreach ($buildings as $building)
                 <div class="card text-center">
-                    <img src="{{ asset('assets/img/' . $building['image']) }}" class="card-img-top" alt="{{ $building['name'] }}" width="50%" height="75%">
+                <img src="{{ asset('assets/img/' . $building['foto']) }}" 
+                onerror="this.src='{{ asset('assets/img/default-image.jpg') }}'"
+                class="card-img-top" alt="{{ $building['name_building'] }}" width="50%" height="75%">
+
                     <div class="card-body">
-                        <h3 class="card-title">{{ $building['name'] }}</h3>
+                        <h3 class="card-title">{{ $building['name_building'] }}</h3>
                         CONNECT MAPS <br /> <br />
-                        <a href="{{ $building['url'] }}" class="btn btn-danger">Cek Ketersediaan</a>
+                        <a href="{{ $building['mapping'] }}" class="btn btn-danger">Cek Ketersediaan</a>
                     </div>
                 </div>
             @endforeach
