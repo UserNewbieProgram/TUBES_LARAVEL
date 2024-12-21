@@ -58,7 +58,7 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="{{ route('admin.index_admin')}}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -88,9 +88,11 @@
             </a>
             <ul id="edits-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="#">
-                        <i class="bi bi-circle"></i><span>Data Gedung</span>
-                    </a>
+                    @if(isset($building))
+                        <a href="{{ route('admin.edit_gedung', ['id' => $building->id]) }}">
+                            <i class="bi bi-circle"></i><span>Data Gedung</span>
+                        </a>
+                    @endif
                 </li>
                 <li>
                     <a href="#">
@@ -137,19 +139,19 @@
     <div class="row mb-3">
         <label for="inputText" class="col-sm-2 col-form-label">Nama Gedung</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="name_building" id="inputText">
+            <input type="text" class="form-control" name="name_building" id="inputText" value = "{{ $building->name_bulding ?? ''}}">
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputNumber" class="col-sm-2 col-form-label">Jumlah Lantai</label>
         <div class="col-sm-10">
-            <input type="number" class="form-control" name="floor" id="inputNumber">
+            <input type="number" class="form-control" name="floor" id="inputNumber" value = "{{ $building->floor ?? ''}}">
         </div>
     </div>
     <div class="row mb-3">
         <label for="inputURL" class="col-sm-2 col-form-label">Alamat (Link Maps)</label>
         <div class="col-sm-10">
-            <input type="url" class="form-control" name="mapping" id="inputURL" placeholder="https://contoh.com">
+            <input type="url" class="form-control" name="mapping" id="inputURL" placeholder="https://contoh.com" value = "{{ $building->mapping ?? ''}}">
         </div>
     </div>
     <div class="row mb-3">
