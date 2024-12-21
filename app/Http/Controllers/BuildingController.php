@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 
 class BuildingController extends Controller
 {
+    public function index()
+    {
+        $buildings = Building::all();
+        return view('admin.index_admin', compact('buildings'));
+    }
     // Menampilkan form tambah gedung
     public function create()
     {
-        return view('admin.form_gedung');
+        $building = Building::first();
+        return view('admin.form_gedung', compact('building'));
     }
 
     // Menyimpan data gedung ke database
@@ -49,13 +55,14 @@ class BuildingController extends Controller
     public function edit($id)
     {
         $building = Building::findOrFail($id);
-        return view('admin.edit_gedung', compact('building'));
+        $allBuildings = Building::all();
+        return view('admin.edit_gedung', compact('building', 'allBuildings'));
     }
 
     public function formGedung()
     {
         $building = Building::all(); // Atau sesuai kebutuhan Anda
-        return view('admin.form_gedung', compact('buildings'));
+        return view('admin.form_gedung', compact('building'));
     }
 
     public function update(Request $request, $id)
