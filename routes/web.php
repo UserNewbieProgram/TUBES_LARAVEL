@@ -39,9 +39,11 @@ Route::get('/riwayat', function () {
 
 // pakai BuildingController
 use App\Http\Controllers\BuildingController;
+Route::get('/admin/index_admin', [BuildingController::class, 'index'])->name('admin.index_admin');
 Route::get('/mahasiswa/index_mhs', [BuildingController::class, 'indexMahasiswa'])->name('mahasiswa.index_mhs');
 Route::get('/admin/form_gedung', [BuildingController::class, 'create'])->name('admin.form_gedung');
 Route::post('/building/store', [BuildingController::class, 'store'])->name('admin.store_gedung');
 Route::get('/admin/{id}/edit_gedung', [BuildingController::class, 'edit'])->name('admin.edit_gedung');
 Route::put('/admin/{id}/edit_gedung', [BuildingController::class, 'update'])->name('admin.update_gedung');
 // Route::delete('/admin/{id}', [BuildingController::class, 'destroy']);
+
