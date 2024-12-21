@@ -3,14 +3,14 @@
 @section('title', 'Edit Gedung')
 
 @push('styles')
-<!-- Tambahkan CSS khusus jika diperlukan -->
+    <link href="{{ asset('assets/css/style_Admin.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('admin.dashboard') }}" class="logo d-flex align-items-center">
+        <a href="{{ route('mahasiswa.index_mhs') }}" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/img/logo.png') }}" alt="">
             <span class="d-none d-lg-block">N-Space</span>
         </a>
@@ -31,9 +31,9 @@
                         <span>Admin</span>
                     </li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="{{ route('admin.profile') }}"><i class="bi bi-person"></i> <span>Profil Saya</span></a></li>
+                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-person"></i> <span>Profil Saya</span></a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="{{ route('admin.logout') }}"><i class="bi bi-box-arrow-right"></i> <span>Keluar</span></a></li>
+                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-box-arrow-right"></i> <span>Keluar</span></a></li>
                 </ul><!-- End Profile Dropdown Items -->
             </li><!-- End Profile Nav -->
         </ul>
@@ -43,14 +43,14 @@
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid"></i><span>Dashboard</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('admin.index_admin')}}"><i class="bi bi-grid"></i><span>Dashboard</span></a></li>
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-building"></i><span>Tambah Data</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                <li><a href="{{ route('admin.add-gedung') }}"><i class="bi bi-circle"></i><span>Data Gedung</span></a></li>
-                <li><a href="{{ route('admin.add-ruang') }}"><i class="bi bi-circle"></i><span>Data Ruang</span></a></li>
+                <li><a href="{{ route('admin.form_gedung') }}"><i class="bi bi-circle"></i><span>Data Gedung</span></a></li>
+                <li><a href="#"><i class="bi bi-circle"></i><span>Data Ruang</span></a></li>
             </ul>
         </li><!-- End Form Data Nav -->
 
@@ -59,12 +59,12 @@
                 <i class="bi bi-journal-text"></i><span>Edit Data</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="edits-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
-                <li><a href="{{ route('admin.edit_building') }}" class="active"><i class="bi bi-circle"></i><span>Data Gedung</span></a></li>
-                <li><a href="{{ route('admin.display_room') }}"><i class="bi bi-circle"></i><span>Data Ruang</span></a></li>
+                <li><a href="{{ route('admin.edit_gedung', ['id' => $building->id]) }}" class="active"><i class="bi bi-circle"></i><span>Data Gedung</span></a></li>
+                <li><a href="#"><i class="bi bi-circle"></i><span>Data Ruang</span></a></li>
             </ul>
         </li><!-- End Edit Data Nav -->
 
-        <li class="nav-item"><a class="nav-link collapsed" href="{{ route('admin.history') }}"><i class="bi bi-layout-text-window-reverse"></i><span>Riwayat</span></a></li>
+        <li class="nav-item"><a class="nav-link collapsed" href="#"><i class="bi bi-layout-text-window-reverse"></i><span>Riwayat</span></a></li>
     </ul>
 </aside><!-- End Sidebar -->
 
@@ -73,7 +73,7 @@
         <h1>Edit Data Gedung</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('mahasiswa.index_mhs') }}">Beranda</a></li>
                 <li class="breadcrumb-item">Edit Data</li>
                 <li class="breadcrumb-item active">Data Gedung</li>
             </ol>
@@ -82,21 +82,39 @@
 
     <section class="section">
         <div class="container">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col h-100">
-                    <div class="card text-center h-100">
-                        <img src="{{ asset('assets/img/GSG.jpg') }}" class="card-img-top" alt="Gedung Serba Guna">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">GSG</h5>
-                            <p><a href="#" class="text-decoration-none">CONNECT MAPS</a></p>
-                            <div class="d-grid gap-2 mt-3">
-                                <a href="{{ route('admin.edit_building-form', ['gedung' => 'gsg']) }}" class="btn btn-primary" role="button">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Duplicate this for other buildings -->
-            </div>
+        <form action="{{ route('admin.update_gedung', $building->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+
+        <div class="mb-3">
+            <label for="name_building" class="form-label">Nama Gedung</label>
+            <select class="form-control" id="name_building" name="name_building" required>
+                        @foreach($allBuildings as $bld)
+                            <option value="{{ $bld->name_building }}" {{ $bld->name_building == $building->name_building ? 'selected' : '' }}>
+                                {{ $bld->name_building }}
+                            </option>
+                        @endforeach
+                    </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="floor" class="form-label">Lantai</label>
+            <input type="number" class="form-control" id="floor" name="floor" value="{{ $building->floor }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="mapping" class="form-label">Mapping URL</label>
+            <input type="url" class="form-control" id="mapping" name="mapping" value="{{ $building->mapping }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto</label>
+            <input type="file" class="form-control" id="foto" name="foto">
+            <small>Upload file gambar (opsional).</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
         </div>
     </section>
 </main><!-- End #main -->
