@@ -103,6 +103,26 @@
         </li><!-- End Edit Data Nav -->
 
         <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#hapuss-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Hapus Data</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="hapuss-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    
+                        <a href="#">
+                            <i class="bi bi-circle"></i><span>Data Gedung</span>
+                        </a>
+                    
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Data Ruang</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Delete Data Nav -->
+
+        <li class="nav-item">
             <a class="nav-link collapsed" href="#">
                 <i class="bi bi-layout-text-window-reverse"></i>
                 <span>Riwayat</span>
