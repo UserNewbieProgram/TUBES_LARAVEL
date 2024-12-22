@@ -12,6 +12,7 @@ class Building extends Model
     protected $table = 'buildings';
 
     protected $fillable = [
+        'id',
         'name_building',
         'floor',
         'mapping',
