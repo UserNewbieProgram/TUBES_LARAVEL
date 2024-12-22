@@ -100,5 +100,18 @@ class BuildingController extends Controller
         return redirect()->route('mahasiswa.index_mhs')->with('success', 'Data Gedung berhasil diperbarui!');
     }
 
+    public function destroy($id)
+    {
+        $building = Building::findOrFail($id);
+        $building->delete();
 
+        return redirect()->route('admin.index_admin')->with('success', 'Gedung berhasil dihapus');
+    }
+
+    public function hapusGedung($id)
+    {
+        $building = Building::findOrFail($id); // Mengambil data gedung berdasarkan ID
+        $allBuildings = Building::all(); // Opsional, untuk menampilkan semua gedung
+        return view('admin.hapus_gedung', compact('building', 'allBuildings'));
+    }
 }
