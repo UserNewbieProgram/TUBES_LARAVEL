@@ -49,7 +49,7 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <a href="{{ route('mahasiswa.dashboard') }}" class="btn btn-primary w-100 text-center">Login</a>
+                                        <a href="#" class="btn btn-primary w-100 text-center">Login</a>
                                     </div>
 
                                     <div class="col-12 text-center mt-3">

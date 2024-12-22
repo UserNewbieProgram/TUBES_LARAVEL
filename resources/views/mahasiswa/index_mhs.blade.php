@@ -113,7 +113,7 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ $building['name_building'] }}</h3>
                         CONNECT MAPS <br /> <br />
-                        <a href="{{ $building['mapping'] }}" class="btn btn-danger">Cek Ketersediaan</a>
+                        <a href="{{ route('building.rooms', $building->id) }}" class="btn btn-danger">Cek Ketersediaan</a>
                     </div>
                 </div>
             @endforeach

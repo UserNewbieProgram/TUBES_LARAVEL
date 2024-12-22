@@ -24,7 +24,7 @@
                         <span>Mahasiswa</span>
                     </li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="{{ route('mahasiswa.profil') }}">
+                    <li><a class="dropdown-item d-flex align-items-center" href="#">
                         <i class="bi bi-person"></i>
                         <span>Profil Saya</span></a>
                     </li>

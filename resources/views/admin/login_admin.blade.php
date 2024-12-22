@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="col-12">
-                      <a href="{{ route('admin.dashboard') }}" class="btn btn-primary w-100 text-center">Login</a>
+                      <a href="{{ route('admin.index_admin') }}" class="btn btn-primary w-100 text-center">Login</a>
                     </div>
                     
                     <div class="col-12 text-center mt-3">

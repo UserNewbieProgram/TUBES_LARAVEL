@@ -14,7 +14,7 @@ class Booking extends Model
     protected $fillable = [
         'nama_pemesan',
         'no_hp',
-        'nama_ruangan',
+        'room_id',
         'tgl_mulai',
         'tgl_selesai',
         'jam_mulai',
@@ -23,4 +23,9 @@ class Booking extends Model
         'organisasi',
         'status'
     ];
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }

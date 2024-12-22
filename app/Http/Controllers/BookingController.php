@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Room;
 
 class BookingController extends Controller
 {
     // Menampilkan form pengajuan
-    public function create()
+    public function create($room_id)
     {
-        return view('mahasiswa/form_pengajuan');
+        $room = Room::with('building')->findOrFail($room_id);
+        return view('mahasiswa.form_pengajuan', compact('room'));
     }
 
     // Menyimpan data pengajuan ke database
@@ -19,7 +21,7 @@ class BookingController extends Controller
         $request->validate([
             'nama_pemesan' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15',
-            'nama_ruangan' => 'required|string|max:255',
+            'room_id' => 'required|exists:rooms,id', // Tambahkan validasi room_id
             'tgl_mulai' => 'required|date',
             'tgl_selesai' => 'required|date',
             'jam_mulai' => 'required',
@@ -28,9 +30,23 @@ class BookingController extends Controller
             'organisasi' => 'required|string|max:255'
         ]);
 
-        Booking::create($request->all());
+        try {
+            Booking::create([
+                'nama_pemesan' => $request->nama_pemesan,
+                'no_hp' => $request->no_hp,
+                'room_id' => $request->room_id,
+                'tgl_mulai' => $request->tgl_mulai,
+                'tgl_selesai' => $request->tgl_selesai,
+                'jam_mulai' => $request->jam_mulai,
+                'jam_selesai' => $request->jam_selesai,
+                'tujuan' => $request->tujuan,
+                'organisasi' => $request->organisasi
+            ]);
 
-        return redirect()->route('riwayat.index')->with('success', 'Pengajuan berhasil dikirim!');
+            return redirect()->route('riwayat.index')->with('success', 'Pengajuan berhasil dikirim!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     // Menampilkan riwayat pengajuan

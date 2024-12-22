@@ -1,4 +1,4 @@
-@extends('layouts.main_admin_mhs')
+@extends('layouts.main_mhs')
 
 @section('title', 'Form Pengajuan')
 
@@ -77,6 +77,22 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Isi Form dibawah Ini Untuk Mengajukan Peminjaman</h5>
+            
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <!-- General Form Elements -->
             <form method="POST" action="{{ route('form.store') }}">
@@ -96,7 +112,8 @@
               <div class="row mb-3">
                   <label for="namaruang" class="col-sm-2 col-form-label">Nama Ruangan</label>
                   <div class="col-sm-10">
-                      <input type="text" name="nama_ruangan" class="form-control" value="Terisi Otomatis Nama Ruangan yang Dipilih" readonly>
+                    <input type="text" class="form-control" value="{{ $room->name }}" readonly>
+                    <input type="hidden" name="room_id" value="{{ $room->id }}">
                   </div>
               </div>
               <div class="row mb-3">

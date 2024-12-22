@@ -6,14 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('building');
+            $table->foreignId('building_id')->constrained('buildings')->onDelete('cascade');
             $table->integer('floor');
             $table->string('name');
             $table->integer('capacity');
@@ -23,10 +20,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('rooms');
     }

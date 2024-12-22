@@ -1,11 +1,11 @@
-@extends('layouts.main_admin')
+@extends('layouts.main_mhs')
 
-@section('title', 'Daftar Ruang GSG')
+@section('title', 'Daftar Ruang ' . $building->name_building)
 
 @section('content')
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('mahasiswa.dashboard') }}" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" class="img-fluid">
             <span class="d-none d-lg-block">N-Space</span>
         </a>
@@ -27,7 +27,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('mahasiswa.profil') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-person"></i>
                             <span>Profil Saya</span>
                         </a>
@@ -36,7 +36,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Keluar</span>
                         </a>
@@ -50,11 +50,11 @@
 <main id="main" class="main">
     <div class="container"></div>
     <div class="pagetitle">
-        <h1>Daftar Ruangan</h1>
+        <h1>Daftar Ruangan {{ $building->name_building }}</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('mahasiswa.dashboard') }}">Beranda</a></li>
-                <li class="breadcrumb-item">Gedung GSG</li>
+                <li class="breadcrumb-item"><a href="{{ route('mahasiswa.index_mhs') }}">Beranda</a></li>
+                <li class="breadcrumb-item">{{ $building->name_building }}</li>
                 <li class="breadcrumb-item active">Daftar Ruangan</li>
             </ol>
         </nav>
@@ -64,12 +64,17 @@
         <div class="card-group">
             @foreach ($rooms as $room)
                 <div class="card text-center mb-4 me-4">
-                    <img src="{{ asset('assets/img/' . $room['image']) }}" class="card-img-top" alt="{{ $room['name'] }}" width="50%" height="75%">
+                    <img src="{{ asset('storage/' . $room->photo_url) }}" 
+                         class="card-img-top" 
+                         alt="{{ $room->name }}" 
+                         width="50%" 
+                         height="75%">
                     <div class="card-body">
-                        <h3 class="card-title">{{ $room['name'] }}</h3>
-                        <p>Kapasitas : {{ $room['capacity'] }} orang</p>
-                        <p>Fasilitas : {{ $room['facilities'] }}</p>
-                        <a href="{{ $room['availability_url'] }}" class="btn btn-danger">Cek Ketersediaan</a>
+                        <h3 class="card-title">{{ $room->name }}</h3>
+                        <p>Kapasitas : {{ $room->capacity }} orang</p>
+                        <p>Fasilitas : {{ implode(', ', json_decode($room->facilities)) }}</p>
+                        <a href="{{ route('form.create', ['room_id' => $room->id]) }}" 
+                           class="btn btn-danger">Cek Ketersediaan</a>
                     </div>
                 </div>
             @endforeach

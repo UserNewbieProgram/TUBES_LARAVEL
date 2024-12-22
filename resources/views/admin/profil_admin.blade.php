@@ -10,7 +10,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="{{ route('admin.dashboard') }}" class="logo d-flex align-items-center">
+            <a href="{{ route('admin.index_admin') }}" class="logo d-flex align-items-center">
                 <img src="{{ asset('assets/img/logo.png') }}" alt="">
                 <span class="d-none d-lg-block">N-Space</span>
             </a>
@@ -42,7 +42,7 @@
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item"><a class="nav-link collapsed" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid"></i> <span>Dashboard</span></a></li>
+            <li class="nav-item"><a class="nav-link collapsed" href="{{ route('admin.index_admin') }}"><i class="bi bi-grid"></i> <span>Dashboard</span></a></li>
             <li class="nav-item"><a class="nav-link collapsed" href="{{ route('admin.data.gedung') }}"><i class="bi bi-building"></i><span>Tambah Data</span></a></li>
             <li class="nav-item"><a class="nav-link collapsed" href="{{ route('admin.data.riwayat') }}"><i class="bi bi-layout-text-window-reverse"></i><span>Riwayat</span></a></li>
         </ul>
@@ -53,7 +53,7 @@
             <h1>Profil Saya</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Beranda</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.index_admin') }}">Beranda</a></li>
                     <li class="breadcrumb-item active">Profil Saya</li>
                 </ol>
             </nav>

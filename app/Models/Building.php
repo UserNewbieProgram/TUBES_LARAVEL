@@ -18,4 +18,9 @@ class Building extends Model
         'mapping',
         'foto'
     ];
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

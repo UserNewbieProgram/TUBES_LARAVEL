@@ -12,11 +12,16 @@ class Room extends Model
     protected $table = 'rooms';
 
     protected $fillable = [
-        'building',
+        'building_id',
         'floor',
         'name',
         'capacity',
         'facilities',
         'photo_url'
     ];
+
+    public function building()
+    {
+        return $this->belongsTo(Building::class);
+    }
 }

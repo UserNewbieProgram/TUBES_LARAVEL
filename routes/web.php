@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 
 // Route untuk form pengajuan
-Route::get('mahasiswa/form_pengajuan', [BookingController::class, 'create'])->name('form.create');
+Route::get('mahasiswa/form_pengajuan/{room_id}', [BookingController::class, 'create'])->name('form.create');
 Route::post('mahasiswa/form_pengajuan', [BookingController::class, 'store'])->name('form.store');
 
 // Route untuk riwayat peminjaman
@@ -19,9 +19,15 @@ Route::post('/room/store', [RoomController::class, 'store'])->name('admin.store_
 
 Route::get('/room/display', [RoomController::class, 'display'])->name('admin.display_room');
 
-Route::get('/admin', function () {
-    return view('index_admin');
-})->name('admin.dashboard');
+Route::get('/room/{id}/edit', [RoomController::class, 'edit'])->name('admin.edit_room');
+
+Route::put('/room/{id}', [RoomController::class, 'update'])->name('admin.update_room');
+
+Route::delete('/room/{id}', [RoomController::class, 'destroy'])->name('admin.delete_room');
+
+// Route untuk menampilkan daftar ruangan per gedung
+Route::get('/building/{building_id}/rooms', [RoomController::class, 'showRoomsByBuilding'])->name('building.rooms');
+
 
 Route::get('/admin/profile', function () {
     return view('profil_admin');

@@ -5,7 +5,7 @@
 @section('content')
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('mahasiswa.dashboard') }}" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/img/logo.png') }}" alt="">
             <span class="d-none d-lg-block">N-Space</span>
         </a>
@@ -26,7 +26,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('mahasiswa.profil') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-person"></i> <span>Profil Saya</span>
                         </a>
                     </li>
@@ -34,7 +34,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-box-arrow-right"></i> <span>Keluar</span>
                         </a>
                     </li>
@@ -50,7 +50,7 @@
         <h1>Form Peminjaman Ruangan</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('mahasiswa.dashboard') }}">Gedung</a></li>
+                <li class="breadcrumb-item"><a href="#">Gedung</a></li>
                 <li class="breadcrumb-item">Gedung GSG</li>
                 <li class="breadcrumb-item">Daftar Ruangan</li>
                 <li class="breadcrumb-item active">Form Pengajuan</li>

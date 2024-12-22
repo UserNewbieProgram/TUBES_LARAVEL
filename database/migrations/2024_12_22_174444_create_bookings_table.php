@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pemesan'); 
             $table->string('no_hp'); 
-            $table->string('nama_ruangan'); 
+            $table->foreignId('room_id')->constrained('rooms'); 
             $table->date('tgl_mulai'); 
             $table->date('tgl_selesai');
             $table->time('jam_mulai'); 

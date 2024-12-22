@@ -1,4 +1,4 @@
-@extends('layouts.main_admin_mhs')
+@extends('layouts.main_mhs')
 
 @section('title', 'Riwayat Mahasiswa')
 
@@ -66,6 +66,13 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Riwayat Peminjaman Ruangan Telkom University</h5>
+                    
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    
                     <div class="datatable-top">
                         <div class="datatable-dropdown">
                             <label>
@@ -102,7 +109,7 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $item->nama_pemesan }}</td>
                                 <td>{{ $item->no_hp }}</td>
-                                <td>{{ $item->nama_ruangan }}</td>
+                                <td>{{ $item->room->name }}</td>
                                 <td>{{ $item->tgl_mulai }}</td>
                                 <td>{{ $item->tgl_selesai }}</td>
                                 <td>{{ $item->jam_mulai }}</td>
