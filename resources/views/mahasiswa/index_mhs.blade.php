@@ -8,7 +8,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
         <a href="{{ route('mahasiswa.index_mhs') }}" class="logo d-flex align-items-center">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" class="img-fluid">
             <span class="d-none d-lg-block">N-Space</span>
         </a>
     </div>
@@ -62,58 +62,17 @@
     </div>
 
     <section class="section dashboard">
-        <div id="map">
-            <script>
-                var map = L.map('map').setView([51.505, -0.09], 13);
-
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
-
-                navigator.geolocation.watchPosition(success, error);
-                let marker, circle, zoomed;
-
-                function success(pos) {
-                    const lat = pos.coords.latitude;
-                    const lng = pos.coords.longitude;
-                    const accuracy = pos.coords.accuracy;
-
-                    if (marker) {
-                        map.removeLayer(marker);
-                        map.removeLayer(circle);
-                    }
-                    marker = L.marker([lat, lng]).addTo(map);
-                    circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
-
-                    if (!zoomed) {
-                        zoomed = map.fitBounds(circle.getBounds());
-                    }
-
-                    map.setView([lat, lng]);
-                }
-
-                function error(err) {
-                    if (err.code === 1) {
-                        alert("Please allow geolocation access");
-                    } else {
-                        alert("Cannot get location");
-                    }
-                }
-            </script>
-        </div>
-        <br />
-        <div class="card-group">
+    <div class="card-group">
             @foreach ($buildings as $building)
-                <div class="card text-center">
+                <div class="card text-center mb-4 me-4">
                 <img src="{{ asset('assets/img/' . $building['foto']) }}" 
-                onerror="this.src='{{ asset('assets/img/default-image.jpg') }}'"
+                onerror="this.src='{{ asset('assets/img/default-image.jpg') }}'" ;
                 class="card-img-top" alt="{{ $building['name_building'] }}" width="50%" height="75%">
 
                     <div class="card-body">
                         <h3 class="card-title">{{ $building['name_building'] }}</h3>
-                        CONNECT MAPS <br /> <br />
-                        <a href="{{ route('building.rooms', $building->id) }}" class="btn btn-danger">Cek Ketersediaan</a>
+                        CEK KETERSEDIAAN <br /> <br />
+                        <a href="{{ $building['mapping'] }}" class="btn btn-danger">LOKASI</a>
                     </div>
                 </div>
             @endforeach
