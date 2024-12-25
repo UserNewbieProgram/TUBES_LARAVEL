@@ -661,7 +661,7 @@ h6 {
 }
 
 .card-img-top {
-    height: 200px; /* Tinggi gambar tetap */
+    height: 300px; /* Tinggi gambar tetap */
     object-fit: cover; /* Gambar tidak terdistorsi */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
