@@ -66,40 +66,36 @@ class BuildingController extends Controller
         return view('admin.form_gedung', compact('building'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name_building' => 'required|string|max:255',
-            'floor' => 'required|integer|min:1',
-            'mapping' => 'required|url',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+    public function updateGedung(Request $request, $id)
+{
+    $validated = $request->validate([
+        'building_id' => 'required|exists:buildings,id',
+        'name_building' => 'required|string|max:255',
+        'floor' => 'required|integer|min:1',
+        'mapping' => 'required|url',
+        'foto' => 'nullable|image|max:2048',
+    ]);
 
-        $building = Building::findOrFail($id);
+    // Menemukan gedung berdasarkan building_id
+    $building = Building::findOrFail($request->building_id);
+    
+    $building->name_building = $validated['name_building'];
+    $building->floor = $validated['floor'];
+    $building->mapping = $validated['mapping'];
 
-        // Periksa apakah ada gambar baru
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('assets/img'), $filename);
-
-            // Hapus foto lama
-            if ($building->foto && file_exists(public_path('assets/img/' . $building->foto))) {
-                unlink(public_path('assets/img/' . $building->foto));
-            }
-
-            $building->foto = $filename;
-        }
-
-        // Update data lainnya
-        $building->update([
-            'name_building' => $request->name_building,
-            'floor' => $request->floor,
-            'mapping' => $request->mapping,
-        ]);
-
-        return redirect()->route('mahasiswa.index_mhs')->with('success', 'Data Gedung berhasil diperbarui!');
+    if ($request->hasFile('foto')) {
+        $file = $request->file('foto');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('assets/img'), $filename);
+        $building->foto = $filename;
     }
+
+    $building->save();
+
+    return redirect()->route('admin.edit_gedung', ['id' => $building->id])
+                     ->with('success', 'Data gedung berhasil diperbarui.');
+}
+
 
     public function destroy($id)
     {
