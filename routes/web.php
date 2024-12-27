@@ -50,7 +50,7 @@ Route::get('/mahasiswa/index_mhs', [BuildingController::class, 'indexMahasiswa']
 Route::get('/admin/form_gedung', [BuildingController::class, 'create'])->name('admin.form_gedung');
 Route::post('/building/store', [BuildingController::class, 'store'])->name('admin.store_gedung');
 Route::get('/admin/{id}/edit_gedung', [BuildingController::class, 'edit'])->name('admin.edit_gedung');
-Route::put('/admin/{id}/edit_gedung', [BuildingController::class, 'update'])->name('admin.update_gedung');
+Route::put('/admin/{id}/update_gedung', [BuildingController::class, 'updateGedung'])->name('admin.update_gedung');
 Route::delete('/admin/{id}/hapus_gedung', [BuildingController::class, 'destroy'])->name('admin.destroy_gedung');
 Route::get('/admin/{id}/hapus_gedung', [BuildingController::class, 'hapusGedung'])->name('admin.hapus_gedung');
 
