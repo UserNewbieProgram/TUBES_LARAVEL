@@ -71,7 +71,8 @@
 
                     <div class="card-body">
                         <h3 class="card-title">{{ $building['name_building'] }}</h3>
-                        CEK KETERSEDIAAN <br /> <br />
+                        <a href="{{ route('building.rooms', $building->id) }}" class="btn btn-primary">Cek Ketersediaan</a>
+                        <br>
                         <a href="{{ $building['mapping'] }}" class="btn btn-danger">LOKASI</a>
                     </div>
                 </div>

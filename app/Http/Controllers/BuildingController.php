@@ -16,7 +16,8 @@ class BuildingController extends Controller
     public function create()
     {
         $building = Building::first();
-        return view('admin.form_gedung', compact('building'));
+        $buildings = Building::all();
+        return view('admin.form_gedung', compact('building', 'buildings'));
     }
 
     // Menyimpan data gedung ke database

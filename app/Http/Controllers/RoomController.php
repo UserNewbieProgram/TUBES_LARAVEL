@@ -59,7 +59,8 @@ class RoomController extends Controller
     public function display()
     {
         $rooms = Room::all();
-        return view('admin.edit_ruang', compact('rooms'));
+        $buildings = Building::all();
+        return view('admin.edit_ruang', compact('rooms', 'buildings'));
     }
 
     //Menampilkan halaman form edit room
@@ -122,6 +123,7 @@ class RoomController extends Controller
         return redirect()->route('admin.display_room')->with('success', 'Ruang berhasil dihapus.');
     }
 
+    //Menampilkan daftar ruang pada gedung
     public function showRoomsByBuilding($building_id)
     {
         $building = Building::findOrFail($building_id);

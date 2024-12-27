@@ -49,7 +49,7 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="{{ route('admin.display_room') }}">
                             <i class="bi bi-circle"></i><span>Data Ruang</span>
                         </a>
                     </li>
@@ -61,22 +61,16 @@
                     <i class="bi bi-journal-text"></i><span>Hapus Data</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="hapuss-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                <li>
-    @if($buildings->isNotEmpty())
-        <a href="{{ route('admin.hapus_gedung', ['id' => $buildings->first()->id]) }}">
-            <i class="bi bi-circle"></i><span>Data Gedung</span>
-        </a>
-    @else
-        <a href="#" class="text-muted">
-            <i class="bi bi-circle"></i><span>Data Gedung (Kosong)</span>
-        </a>
-    @endif
-</li>
-
                     <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Data Ruang</span>
-                        </a>
+                        @if($buildings->isNotEmpty())
+                            <a href="{{ route('admin.hapus_gedung', ['id' => $buildings->first()->id]) }}">
+                                <i class="bi bi-circle"></i><span>Data Gedung</span>
+                            </a>
+                        @else
+                            <a href="#" class="text-muted">
+                                <i class="bi bi-circle"></i><span>Data Gedung (Kosong)</span>
+                            </a>
+                        @endif
                     </li>
                 </ul>
             </li><!-- End Delete Data Nav -->
