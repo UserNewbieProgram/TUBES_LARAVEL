@@ -58,7 +58,7 @@ class UserController extends Controller
 
         $data = $request->only('name', 'email', 'role');
 
-       
+        // Check if password needs to be updated
         if ($request->filled('password')) {
             $request->validate([
                 'password' => 'required|string|min:8|confirmed',
