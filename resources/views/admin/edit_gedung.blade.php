@@ -59,6 +59,32 @@
                     </li>
                 </ul>
             </li><!-- End Edit Data Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#hapuss-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Hapus Data</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="hapuss-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+                        @if($allBuildings->isNotEmpty())
+                            <a href="{{ route('admin.hapus_gedung', ['id' => $allBuildings->first()->id]) }}">
+                                <i class="bi bi-circle"></i><span>Data Gedung</span>
+                            </a>
+                        @else
+                            <a href="#" class="text-muted">
+                                <i class="bi bi-circle"></i><span>Data Gedung (Kosong)</span>
+                            </a>
+                        @endif
+                    </li>
+                </ul>
+            </li><!-- End Delete Data Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i>
+                    <span>Riwayat</span>
+                </a>
+            </li><!-- End Riwayat Nav -->
         </ul>
     </aside><!-- End Sidebar -->
 
