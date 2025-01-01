@@ -11,7 +11,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index_Mahasiswa.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <img src="{{ asset('assets/img/logo.png') }}" alt="">
         <span class="d-none d-lg-block">N-Space</span>
       </a>
     </div><!-- End Logo -->
@@ -21,7 +21,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/foto-profil-mahasiswa.jpg" alt="Profile" class="rounded-circle">
+            <img src="{{ asset('assets/img/foto-profil-mahasiswa.jpg') }}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">J. Smith</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -56,7 +56,11 @@
 
       </ul>
     </nav><!-- End Icons Navigation -->
-
+    <style>
+      .card:hover {
+        transform: none;
+    }
+    </style>
 </header><!-- End Header -->
 
 <main id="main" class="main">
@@ -65,8 +69,8 @@
       <h1>Form Peminjaman Ruangan</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index_Mahasiswa.html">Gedung</a></li>
-          <li class="breadcrumb-item">Ruangan</li>
+          <li class="breadcrumb-item"><a href="{{ route('mahasiswa.index_mhs') }}">Beranda</a></li>
+          <li class="breadcrumb-item">Ruangan {{ $room->name }}</li>
           <li class="breadcrumb-item active">Form Peminjaman</li>
         </ol>
       </nav>
@@ -148,8 +152,11 @@
                       <input type="text" name="organisasi" class="form-control" required>
                   </div>
               </div>
-              <div class="row mb-3">
-                  <div class="col d-flex justify-content-end">
+              <div class="row mb-2">
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                  <div class="col-3 d-flex justify-content-right">
                       <button type="submit" class="btn btn-primary">Submit Form</button>
                       &nbsp;&nbsp;&nbsp;
                       <button type="reset" class="btn btn-secondary">Reset Form</button>

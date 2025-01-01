@@ -46,6 +46,11 @@
             </li>
         </ul>
     </nav>
+    <style>
+    .card:hover {
+        transform: none;
+    }
+    </style>
 </header>
 
 <main id="main" class="main">
@@ -54,9 +59,9 @@
         <h1>Riwayat Peminjaman Ruangan</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="">Gedung</a></li>
-                <li class="breadcrumb-item"><a href=""></a>Ruangan</li>
-                <li class="breadcrumb-item active">Riwayat Peminjaman</li>
+            <li class="breadcrumb-item"><a href="{{ route('mahasiswa.index_mhs') }}">Beranda</a></li>
+          <li class="breadcrumb-item">Ruangan</li>
+          <li class="breadcrumb-item active">Riwayat Peminjaman</li>
             </ol>
         </nav>
     </div>
@@ -125,10 +130,16 @@
                             @endforeach
                         </tbody>
                     </table>
-
                     <nav aria-label="Page navigation" class="mt-4">
                         {{ $riwayat->links() }}
                     </nav>
+                    <div class="row mb-2">
+                        <div class="col-5"></div>
+                        <div class="col-5"></div>
+                        <div class="col-2 d-flex justify-content-right">
+                            <a href="{{ route('mahasiswa.index_mhs') }}" class="btn btn-primary">Selesai</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
