@@ -54,3 +54,12 @@ Route::put('/admin/{id}/update_gedung', [BuildingController::class, 'updateGedun
 Route::delete('/admin/{id}/hapus_gedung', [BuildingController::class, 'destroy'])->name('admin.destroy_gedung');
 Route::get('/admin/{id}/hapus_gedung', [BuildingController::class, 'hapusGedung'])->name('admin.hapus_gedung');
 
+use App\Http\Controllers\UserController;
+Route::get('/admin/form_user', [UserController::class, 'create'])->name('admin.form_user');
+Route::post('/user/store', [UserController::class, 'store'])->name('admin.store_user');
+Route::get('/admin/{id}/edit_user', [UserController::class, 'edit'])->name('admin.edit_user');
+Route::put('/admin/{id}/update_user', [UserController::class, 'updateUser'])->name('admin.update_user');
+Route::delete('/admin/{id}/hapus_user', [UserController::class, 'destroy'])->name('admin.destroy_user');
+Route::get('/admin/{id}/hapus_user', [UserController::class, 'hapusUser'])->name('admin.hapus_user');
+
+
