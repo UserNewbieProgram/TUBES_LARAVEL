@@ -37,7 +37,6 @@ Route::get('/admin/login', function () {
     return view('admin.login_admin');
 })->name('admin.login');
 
-
 Route::get('/admin/riwayat', function () {
     return view('admin.riwayat_admin');
 })->name('admin.riwayat');
