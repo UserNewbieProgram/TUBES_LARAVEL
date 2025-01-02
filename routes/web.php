@@ -29,23 +29,23 @@ Route::delete('/room/{id}', [RoomController::class, 'destroy'])->name('admin.del
 Route::get('/building/{building_id}/rooms', [RoomController::class, 'showRoomsByBuilding'])->name('building.rooms');
 
 
-Route::get('/admin/profile', function () {
-    return view('profil_admin');
-})->name('admin.profile');
+// Route::get('/admin/profile', function () {
+//     return view('profil_admin');
+// })->name('admin.profile');
 
-Route::get('/login', function () {
-    return view('login_admin');
-})->name('admin.logout');
+// Route::get('/login', function () {
+//     return view('login_admin');
+// })->name('admin.logout');
 
-Route::get('/riwayat', function () {
-    return view('riwayat_admin');
-})->name('admin.riwayat');
+// Route::get('/riwayat', function () {
+//     return view('riwayat_admin');
+// })->name('admin.riwayat');
 
 
 
 // pakai BuildingController
 use App\Http\Controllers\BuildingController;
-Route::get('/admin/index_admin', [BuildingController::class, 'index'])->name('admin.index_admin');
+Route::get('/admin/index_admin', [BookingController::class, 'adminIndex'])->name('admin.index_admin');
 Route::get('/mahasiswa/index_mhs', [BuildingController::class, 'indexMahasiswa'])->name('mahasiswa.index_mhs');
 Route::get('/admin/form_gedung', [BuildingController::class, 'create'])->name('admin.form_gedung');
 Route::post('/building/store', [BuildingController::class, 'store'])->name('admin.store_gedung');
@@ -63,3 +63,6 @@ Route::delete('/admin/{id}/hapus_user', [UserController::class, 'destroy'])->nam
 Route::get('/admin/{id}/hapus_user', [UserController::class, 'hapusUser'])->name('admin.hapus_user');
 
 
+Route::get('/admin/bookings', [BookingController::class, 'adminIndex'])->name('admin.bookings.index');
+Route::get('/admin/bookings/history', [BookingController::class, 'adminHistory'])->name('admin.bookings.history');
+Route::post('/admin/bookings/{id}/update-status', [BookingController::class, 'updateStatus'])->name('admin.bookings.updateStatus');

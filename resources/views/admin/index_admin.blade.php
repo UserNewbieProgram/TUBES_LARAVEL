@@ -76,7 +76,7 @@
             </li><!-- End Delete Data Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{ route('admin.bookings.history') }}">
                     <i class="bi bi-layout-text-window-reverse"></i>
                     <span>Riwayat</span>
                 </a>
@@ -134,38 +134,28 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($bookings as $booking)
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>081234567890</td>
-                                                <td>VIP A</td>
-                                                <td>01-11-24</td>
-                                                <td>02-11-24</td>
-                                                <td>09.00</td>
-                                                <td>11.00</td>
-                                                <td>Seminar</td>
-                                                <td>HMIT</td>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>{{ $booking->nama_pemesan }}</td>
+                                                <td>{{ $booking->no_hp }}</td>
+                                                <td>{{ $booking->room->name }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($booking->tgl_mulai)->format('d-m-y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($booking->tgl_selesai)->format('d-m-y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($booking->jam_mulai)->format('H:i') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($booking->jam_selesai)->format('H:i') }}</td>
+                                                <td>{{ $booking->tujuan }}</td>
+                                                <td>{{ $booking->organisasi }}</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-success rounded-pill">Approve</button>
-                                                    <button type="button" class="btn btn-danger rounded-pill">Reject</button>
+                                                    <button type="button" class="btn btn-success rounded-pill" onclick="updateStatus({{ $booking->id }}, 'Disetujui')">
+                                                        Approve
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger rounded-pill" onclick="updateStatus({{ $booking->id }}, 'Ditolak')">
+                                                        Reject
+                                                    </button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jack</td>
-                                                <td>080987654321</td>
-                                                <td>VIP C</td>
-                                                <td>01-11-24</td>
-                                                <td>01-11-24</td>
-                                                <td>15.00</td>
-                                                <td>18.00</td>
-                                                <td>Ospek Jurusan</td>
-                                                <td>HMIF</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-success rounded-pill">Approve</button>
-                                                    <button type="button" class="btn btn-danger rounded-pill">Reject</button>
-                                                </td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -176,4 +166,28 @@
             </div>
         </section>
     </main><!-- End #main -->
+
+    <script>
+    function updateStatus(bookingId, status) {
+        if (confirm('Apakah Anda yakin ingin ' + (status === 'Disetujui' ? 'menyetujui' : 'menolak') + ' pengajuan ini?')) {
+            fetch(`/admin/bookings/${bookingId}/update-status`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ status: status })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Status berhasil diperbarui');
+                    location.reload();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+    </script>
+
 @endsection

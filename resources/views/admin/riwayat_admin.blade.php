@@ -11,7 +11,7 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('admin.index_admin') }}">
+                <a class="nav-link" href="{{ route('admin.index_admin') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -80,7 +80,7 @@
             </li><!-- End Delete Data Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link active" href="{{ route('admin.bookings.history') }}">
                     <i class="bi bi-layout-text-window-reverse"></i>
                     <span>Riwayat</span>
                 </a>
@@ -125,22 +125,27 @@
                                     </tr>
                                 </thead>
                                 <tbody class="align-middle">
+                                    @foreach($bookings as $booking)
                                     <tr>
-                                        <th scope="row" class="text-center">1</th>
-                                        <td>Mark</td>
-                                        <td>081234567890</td>
-                                        <td class="text-center">VIP A</td>
-                                        <td class="text-center">01-11-24</td>
-                                        <td class="text-center">02-11-24</td>
-                                        <td class="text-center">09.00</td>
-                                        <td class="text-center">11.00</td>
-                                        <td>Seminar</td>
-                                        <td class="text-center">HMIT</td>
-                                        <td class="text-center">30-10-24</td>
-                                        <td class="text-center">31-10-24</td>
-                                        <td class="text-center"><span class="badge bg-success">Disetujui</span></td>
+                                        <th scope="row" class="text-center">{{ $loop->iteration }}</th>
+                                        <td>{{ $booking->nama_pemesan }}</td>
+                                        <td>{{ $booking->no_hp }}</td>
+                                        <td class="text-center">{{ $booking->room->name }}</td>
+                                        <td class="text-center">{{ \Carbon\Carbon::parse($booking->tgl_mulai)->format('d-m-y') }}</td>
+                                        <td class="text-center">{{ \Carbon\Carbon::parse($booking->tgl_selesai)->format('d-m-y') }}</td>
+                                        <td class="text-center">{{ \Carbon\Carbon::parse($booking->jam_mulai)->format('H:i') }}</td>
+                                        <td class="text-center">{{ \Carbon\Carbon::parse($booking->jam_selesai)->format('H:i') }}</td>
+                                        <td>{{ $booking->tujuan }}</td>
+                                        <td class="text-center">{{ $booking->organisasi }}</td>
+                                        <td class="text-center">{{ $booking->created_at->format('d-m-y') }}</td>
+                                        <td class="text-center">{{ $booking->updated_at->format('d-m-y') }}</td>
+                                        <td class="text-center">
+                                            <span class="badge bg-{{ $booking->status === 'Disetujui' ? 'success' : 'danger' }}">
+                                                {{ $booking->status }}
+                                            </span>
+                                        </td>
                                     </tr>
-                                    <!-- Add other rows as necessary -->
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -150,12 +155,6 @@
         </div>
     </section>
 </main>
-
-<footer id="footer" class="footer">
-    <div class="copyright">
-        &copy; 2024 <strong><span>N-Space</span></strong>. All Rights Reserved
-    </div>
-</footer>
 
 @push('scripts')
 <script src="{{ asset('assets/js/main.js') }}"></script>

@@ -80,7 +80,7 @@
             </li><!-- End Delete Data Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{ route('admin.bookings.history') }}">
                     <i class="bi bi-layout-text-window-reverse"></i>
                     <span>Riwayat</span>
                 </a>
